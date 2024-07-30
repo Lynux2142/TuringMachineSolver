@@ -147,20 +147,20 @@ def main():
         for square in range(1, 6):
             for circle in range(1, 6):
                 n = triangle * 100 + square * 10 + circle
-                test = CardSet(n, [Card4, Card5, Card15, Card16])
-                if test.test_number():
-                    config_set = test.get_config_set()
+                card_set = CardSet(n, [Card2, Card5, Card15, Card16])
+                if card_set.test_number():
+                    config_set = card_set.get_config_set()
                     if config_set in solution:
                         solution[config_set][1].append(n)
                     else:
                         solution[config_set] = (1, [n])
-                while test.next_case_config():
-                    if test.test_number():
-                        config_set = test.get_config_set()
+                while card_set.next_case_config():
+                    if card_set.test_number():
+                        config_set = card_set.get_config_set()
                         if config_set in solution:
-                            solution[config_set][1].append(n)
+                            solution[config_set].append(n)
                         else:
-                            solution[config_set] = (1, [n])
+                            solution[config_set] = [n]
     for elem in solution:
         print(f"{elem}: {solution[elem]}")
 
