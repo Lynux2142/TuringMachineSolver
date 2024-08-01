@@ -84,6 +84,27 @@ class Card5(Card):
         self._case_name = "Triangle is odd"
         self._value = self._triangle % 2 == 1
 
+class Card9(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3, self._case4]
+
+    def _case1(self):
+        self._case_name = "Number 3 appears 0 times"
+        self._value = int(self._triangle == 3) + int(self._square == 3) + int(self._circle == 3) == 0
+
+    def _case2(self):
+        self._case_name = "Number 3 appears 1 time"
+        self._value = int(self._triangle == 3) + int(self._square == 3) + int(self._circle == 3) == 1
+
+    def _case3(self):
+        self._case_name = "Number 3 appears 2 times"
+        self._value = int(self._triangle == 3) + int(self._square == 3) + int(self._circle == 3) == 2
+
+    def _case4(self):
+        self._case_name = "Number 3 appears 3 times"
+        self._value = int(self._triangle == 3) + int(self._square == 3) + int(self._circle == 3) == 3
+
 class Card15(Card):
     def __init__(self, n, case=0):
         super().__init__(n, case)
@@ -114,6 +135,115 @@ class Card16(Card):
     def _case2(self):
         self._case_name = "Even < Odd"
         self._value = self._sum_odd_number > 1
+
+class Card19(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3]
+
+    def _case1(self):
+        self._case_name = "Triangle + Square < 6"
+        self._value = self._triangle + self._square < 6
+
+    def _case2(self):
+        self._case_name = "Triangle + Square = 6"
+        self._value = self._triangle + self._square == 6
+
+    def _case3(self):
+        self._case_name = "Triangle + Square > 6"
+        self._value = self._triangle + self._square > 6
+
+class Card24(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3]
+
+    def _case1(self):
+        self._case_name = "3 consecutive ascending numbers"
+        self._value = self._square - self._triangle == 1 and self._circle - self._square == 1
+
+    def _case2(self):
+        self._case_name = "2 consecutive ascending numbers"
+        self._value = self._square - self._triangle == 1 != self._circle - self._square == 1
+
+    def _case3(self):
+        self._case_name = "No consecutive ascending numbers"
+        self._value = not self._case1() and not self._case2()
+
+class Card34(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3]
+
+    def _case1(self):
+        self._case_name = "Triangle <= (Square and Circle)"
+        self._value = self._triangle <= self._square and self._triangle <= self._circle
+
+    def _case2(self):
+        self._case_name = "Square <= (Triangle and Circle)"
+        self._value = self._square <= self._triangle and self._square <= self._circle
+
+    def _case3(self):
+        self._case_name = "Circle <= (Triangle and Square)"
+        self._value = self._circle <= self._triangle and self._circle <= self._square
+
+class Card39(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3, self._case4, self._case5, self._case6]
+
+    def _case1(self):
+        self._case_name = "Triangle = 1"
+        self._value = self._triangle = 1
+
+    def _case2(self):
+        self._case_name = "Triangle > 1"
+        self._value = self._triangle > 1
+
+    def _case3(self):
+        self._case_name = "Square = 1"
+        self._value = self._square = 1
+
+    def _case4(self):
+        self._case_name = "Square > 1"
+        self._value = self._square > 1
+
+    def _case5(self):
+        self._case_name = "Circle = 1"
+        self._value = self._circle = 1
+
+    def _case6(self):
+        self._case_name = "Circle > 1"
+        self._value = self._circle > 1
+
+class Card42(Card):
+    def __init__(self, n, case=0):
+        super().__init__(n, case)
+        self._case_list = [self._case1, self._case2, self._case3, self._case4, self._case5, self._case6]
+
+    def _case1(self):
+        self._case_name = "Triangle < (Square and Circle)"
+        self._value = self._triangle < self._square and self._triangle < self._circle
+
+    def _case2(self):
+        self._case_name = "Triangle > (Square and Circle)"
+        self._value = self._triangle > self._square and self._triangle > self._circle
+
+    def _case3(self):
+        self._case_name = "Square < (Triangle and Circle)"
+        self._value = self._square < self._triangle and self._square < self._circle
+
+    def _case4(self):
+        self._case_name = "Square > (Triangle and Circle)"
+        self._value = self._square > self._triangle and self._square > self._circle
+
+    def _case5(self):
+        self._case_name = "Circle < (Triangle and Square)"
+        self._value = self._circle < self._triangle and self._circle < self._square
+
+    def _case6(self):
+        self._case_name = "Circle > (Triangle and Square)"
+        self._value = self._circle > self._triangle and self._circle > self._square
 
 class CardSet:
     def __init__(self, n, card_list):
@@ -147,7 +277,7 @@ def main():
         for square in range(1, 6):
             for circle in range(1, 6):
                 n = triangle * 100 + square * 10 + circle
-                card_set = CardSet(n, [Card2, Card5, Card15, Card16])
+                card_set = CardSet(n, [Card9, Card19, Card24, Card39, Card42])
                 if card_set.test_number():
                     config_set = card_set.get_config_set()
                     if config_set in solution:
